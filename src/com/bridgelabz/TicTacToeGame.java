@@ -11,8 +11,11 @@ public class TicTacToeGame {
 	public static void main(String[] args) {
 		System.out.println("Welcome to Tic Tac Toe Game");
 		init();
-		createBoard();
+		showBoard();
+		System.out.println("Board is created!");
 		chooseSign();
+		playerMove();
+		computerMove();
 	}
 
 	public static void init() {
@@ -21,15 +24,14 @@ public class TicTacToeGame {
 		}
 	}
 
-	public static void createBoard() {
-		System.out.println(board[0] + " | " + board[1] + " | " + board[2]);
+	public static void showBoard() {
+		System.out.println(board[1] + " | " + board[2] + " | " + board[3]);
 		System.out.println("---------");
-		System.out.println(board[3] + " | " + board[4] + " | " + board[5]);
+		System.out.println(board[4] + " | " + board[5] + " | " + board[6]);
 		System.out.println("---------");
-		System.out.println(board[6] + " | " + board[7] + " | " + board[8]);
-		System.out.println("Board is created!");
+		System.out.println(board[7] + " | " + board[8] + " | " + board[9]);
 	}
-	
+
 	public static void chooseSign() {
 		while (player != 'X' && player != 'O') {
 			System.out.print("Choose a sign between 'X' and 'O': ");
@@ -44,5 +46,19 @@ public class TicTacToeGame {
 				System.out.println("Invalid choice!");
 		}
 		System.out.println("Player sign: " + player + "\n" + "Comouter sign: " + computer);
+	}
+
+	public static void computerMove() {
+		System.out.println("\nComputer Turn!");
+		int move = (int) ((Math.random() * 9) + 1);
+		board[move] = computer;
+		showBoard();
+	}
+
+	public static void playerMove() {
+		System.out.print("Player Turn!\n" + "Enter position (1-9): ");
+		int move = SC.nextInt();
+		board[move] = player;
+		showBoard();
 	}
 }
