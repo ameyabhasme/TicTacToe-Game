@@ -16,15 +16,39 @@ public class TicTacToeGame {
 		chooseSign();
 		play();
 	}
-	
+
 	public static void play() {
-			do {
+		do {
 			computerMove();
 			playerMove();
-			}while ((board[1] == ' ') || (board[2] == ' ') || (board[3] == ' ') || (board[4] == ' ') 
-					|| (board[5] == ' ') || (board[6] == ' ') || (board[7] == ' ') 
-					|| (board[8] == ' ') || (board[9] == ' '));
-				
+		} while ((board[1] == ' ') || (board[2] == ' ') || (board[3] == ' ') || (board[4] == ' ') || (board[5] == ' ')
+				|| (board[6] == ' ') || (board[7] == ' ') || (board[8] == ' ') || (board[9] == ' '));
+
+	}
+
+	public static void computerMove() {
+		System.out.println("\nComputer Turn!");
+		int move = (int) ((Math.random() * 9) + 1);
+		checkAvailable(move, computer);
+	}
+
+	public static void playerMove() {
+		System.out.print("\nPlayer Turn!" + "\n" + "Enter position (1-9): ");
+		int move = SC.nextInt();
+		checkAvailable(move, player);
+	}
+
+	public static void checkAvailable(int index, char sign) {
+		if (board[index] == ' ') {
+			board[index] = sign;
+			showBoard();
+		} else {
+			System.out.println("Oops!! This position is not availabe.");
+			if (sign == computer)
+				computerMove();
+			else
+				playerMove();
+		}
 	}
 
 	public static void init() {
@@ -55,32 +79,5 @@ public class TicTacToeGame {
 				System.out.println("Invalid choice!");
 		}
 		System.out.println("Player sign: " + player + "\n" + "Comouter sign: " + computer);
-	}
-
-	public static void computerMove() {
-		System.out.println("\nComputer Turn!");
-		int move = (int) ((Math.random() * 9) + 1);
-		checkAvailable(move, computer);
-//		showBoard();
-	}
-
-	public static void playerMove() {
-		System.out.print("\nPlayer Turn!" + "\nEnter position (1-9): ");
-		int move = SC.nextInt();
-		checkAvailable(move, player);
-//		showBoard();
-	}
-
-	public static void checkAvailable(int index, char sign) {
-		if (board[index] == ' ') {
-			board[index] = sign;
-			showBoard();
-		} else {
-			System.out.println("Oops!! This position is not availabe.");
-			if(sign==computer)
-				computerMove();
-			else
-				playerMove();
-		}
 	}
 }
