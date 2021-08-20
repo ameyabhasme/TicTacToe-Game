@@ -7,6 +7,7 @@ public class TicTacToeGame {
 	static char board[] = new char[10];
 	static char player, computer;
 	static final Scanner SC = new Scanner(System.in);
+	static int turn = 0;
 
 	public static void main(String[] args) {
 		System.out.println("Welcome to Tic Tac Toe Game");
@@ -14,16 +15,34 @@ public class TicTacToeGame {
 		showBoard();
 		System.out.println("Board is created!");
 		chooseSign();
-		play();
+		toss();
 	}
 
-	public static void play() {
-		do {
-			computerMove();
-			playerMove();
-		} while ((board[1] == ' ') || (board[2] == ' ') || (board[3] == ' ') || (board[4] == ' ') || (board[5] == ' ')
-				|| (board[6] == ' ') || (board[7] == ' ') || (board[8] == ' ') || (board[9] == ' '));
+	public static void toss() {
+		int toss = (int) (Math.random() * 2);
+		if (toss == 1) {
+			turn = toss;
+			System.out.println("Player won the toss and will play first!");
+			play(turn);
+		} else {
+			turn = toss;
+			System.out.println("Computer won the toss and will play first!");
+			play(turn);
+		}
+	}
 
+	public static void play(int turn) {
+		while ((board[1] == ' ') || (board[2] == ' ') || (board[3] == ' ') || (board[4] == ' ') || (board[5] == ' ')
+				|| (board[6] == ' ') || (board[7] == ' ') || (board[8] == ' ') || (board[9] == ' ')) {
+
+			if (turn == 1) {
+				playerMove();
+				turn = 0;
+			} else if (turn == 0) {
+				computerMove();
+				turn = 1;
+			}
+		}
 	}
 
 	public static void computerMove() {
